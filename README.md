@@ -11,3 +11,17 @@ https://console.firebase.google.com/
 Google developers console:
 https://console.cloud.google.com/
 
+In the application, there can be found methods for:
+
+Google Sing in
+
+Google Spreadsheets:
+    1. Append values
+    2. Send data to any cell
+    3. Read information from a sheet
+    4. Get all of the Sheets from a Spreadsheet
+    
+Google Drive:
+    1.  Get information from files on your Google Drive
+    2.  Create new Spreadsheet and place it into your Google Drive
+    3. Create new Sheets in a selected Spreadsheet
