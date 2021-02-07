@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_google_examples_swift_google_examples_swiftUITests : NSObject
+@end
+@implementation PodsDummy_Pods_google_examples_swift_google_examples_swiftUITests
+@end

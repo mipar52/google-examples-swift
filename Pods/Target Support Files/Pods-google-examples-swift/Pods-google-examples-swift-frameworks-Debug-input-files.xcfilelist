@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-google-examples-swift/Pods-google-examples-swift-frameworks.sh
+${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework
+${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework
+${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework
