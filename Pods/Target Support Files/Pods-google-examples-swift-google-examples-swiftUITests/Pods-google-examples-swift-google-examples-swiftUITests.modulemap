@@ -1,6 +1,0 @@
-framework module Pods_google_examples_swift_google_examples_swiftUITests {
-  umbrella header "Pods-google-examples-swift-google-examples-swiftUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

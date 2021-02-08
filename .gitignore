@@ -1,0 +1,6 @@
+google-examples-swiftTests
+google-examples-swiftUITests
+GoogleService-Info.plist
+Podfile.lock
+Pods
+.DS_Store
