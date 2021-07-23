@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         var configureError: NSError?
-        GIDSignIn.sharedInstance()?.clientID = "your-reverse-client-id-key"
+        GIDSignIn.sharedInstance()?.clientID = "221523093975-3e37h6unj358l6oid9dn7uhppoi6pdi9.apps.googleusercontent.com"
         GGLContext.sharedInstance().configureWithError(&configureError)
         
         assert(configureError == nil, "Error configuring Google services: \(String(describing: configureError))")

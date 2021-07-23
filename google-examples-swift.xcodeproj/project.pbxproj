@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		01A3C6B142D4C0630E1982EB /* Pods_google_examples_swift_google_examples_swiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F02A619D31539DADA9441FB /* Pods_google_examples_swift_google_examples_swiftUITests.framework */; };
 		51B1CAB1F6DF878C63A2487A /* Pods_google_examples_swiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76061A2CC2E1EEE3E690D154 /* Pods_google_examples_swiftTests.framework */; };
+		A150D76126A8557000318377 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A150D76026A8557000318377 /* GoogleService-Info.plist */; };
 		A1AE23B225CFE59B00371F21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AE23B125CFE59B00371F21 /* AppDelegate.swift */; };
 		A1AE23B425CFE59B00371F21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AE23B325CFE59B00371F21 /* SceneDelegate.swift */; };
 		A1AE23B625CFE59B00371F21 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AE23B525CFE59B00371F21 /* ViewController.swift */; };
@@ -19,8 +20,8 @@
 		A1AE23D425CFE59D00371F21 /* google_examples_swiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AE23D325CFE59D00371F21 /* google_examples_swiftUITests.swift */; };
 		A1AE240525CFE78200371F21 /* SpredsheetsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AE240425CFE78200371F21 /* SpredsheetsController.swift */; };
 		A1AE240A25CFE79400371F21 /* DriveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AE240925CFE79400371F21 /* DriveController.swift */; };
-		A1AE242C25CFEBDF00371F21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1AE242B25CFEBDF00371F21 /* GoogleService-Info.plist */; };
 		A1AE243125CFF1FC00371F21 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AE243025CFF1FC00371F21 /* utils.swift */; };
+		A1B6E00126A7FAD100D0C8A2 /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B6E00026A7FAD100D0C8A2 /* CalendarController.swift */; };
 		D6EDD4E845D5F58DB69FD183 /* Pods_google_examples_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EBB791004B001E45413B6FF /* Pods_google_examples_swift.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		5322EB02571BBCA87536B5F8 /* Pods-google-examples-swift-google-examples-swiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-google-examples-swift-google-examples-swiftUITests.debug.xcconfig"; path = "Target Support Files/Pods-google-examples-swift-google-examples-swiftUITests/Pods-google-examples-swift-google-examples-swiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6B45ECC4346FE0585FE2F0F5 /* Pods-google-examples-swift-google-examples-swiftUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-google-examples-swift-google-examples-swiftUITests.release.xcconfig"; path = "Target Support Files/Pods-google-examples-swift-google-examples-swiftUITests/Pods-google-examples-swift-google-examples-swiftUITests.release.xcconfig"; sourceTree = "<group>"; };
 		76061A2CC2E1EEE3E690D154 /* Pods_google_examples_swiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_google_examples_swiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A150D76026A8557000318377 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A1AE23AE25CFE59B00371F21 /* google-examples-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "google-examples-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1AE23B125CFE59B00371F21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1AE23B325CFE59B00371F21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,8 +68,8 @@
 		A1AE23D525CFE59D00371F21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1AE240425CFE78200371F21 /* SpredsheetsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpredsheetsController.swift; sourceTree = "<group>"; };
 		A1AE240925CFE79400371F21 /* DriveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveController.swift; sourceTree = "<group>"; };
-		A1AE242B25CFEBDF00371F21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		A1AE243025CFF1FC00371F21 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
+		A1B6E00026A7FAD100D0C8A2 /* CalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
 		DAD197E747E22CF719730617 /* Pods-google-examples-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-google-examples-swift.release.xcconfig"; path = "Target Support Files/Pods-google-examples-swift/Pods-google-examples-swift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,8 +146,8 @@
 				A1AE23B725CFE59B00371F21 /* Main.storyboard */,
 				A1AE23BA25CFE59C00371F21 /* Assets.xcassets */,
 				A1AE23BC25CFE59C00371F21 /* LaunchScreen.storyboard */,
+				A150D76026A8557000318377 /* GoogleService-Info.plist */,
 				A1AE23BF25CFE59C00371F21 /* Info.plist */,
-				A1AE242B25CFEBDF00371F21 /* GoogleService-Info.plist */,
 			);
 			path = "google-examples-swift";
 			sourceTree = "<group>";
@@ -171,6 +173,7 @@
 		A1AE244225D0085500371F21 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A1B6E00026A7FAD100D0C8A2 /* CalendarController.swift */,
 				A1AE240925CFE79400371F21 /* DriveController.swift */,
 				A1AE240425CFE78200371F21 /* SpredsheetsController.swift */,
 				A1AE23B525CFE59B00371F21 /* ViewController.swift */,
@@ -299,7 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1AE23BE25CFE59C00371F21 /* LaunchScreen.storyboard in Resources */,
-				A1AE242C25CFEBDF00371F21 /* GoogleService-Info.plist in Resources */,
+				A150D76126A8557000318377 /* GoogleService-Info.plist in Resources */,
 				A1AE23BB25CFE59C00371F21 /* Assets.xcassets in Resources */,
 				A1AE23B925CFE59B00371F21 /* Main.storyboard in Resources */,
 			);
@@ -466,6 +469,7 @@
 				A1AE240A25CFE79400371F21 /* DriveController.swift in Sources */,
 				A1AE240525CFE78200371F21 /* SpredsheetsController.swift in Sources */,
 				A1AE23B625CFE59B00371F21 /* ViewController.swift in Sources */,
+				A1B6E00126A7FAD100D0C8A2 /* CalendarController.swift in Sources */,
 				A1AE243125CFF1FC00371F21 /* utils.swift in Sources */,
 				A1AE23B225CFE59B00371F21 /* AppDelegate.swift in Sources */,
 				A1AE23B425CFE59B00371F21 /* SceneDelegate.swift in Sources */,

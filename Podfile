@@ -11,6 +11,10 @@ target 'google-examples-swift' do
 	pod 'GoogleAPIClientForREST/Drive'
 	pod 'Google/SignIn'
 	pod 'GoogleAPIClientForREST/Sheets'
+  pod 'GoogleAPIClient/Calendar'
+  pod 'GoogleAPIClientForREST/Calendar'
+  pod 'GTMOAuth2'
+
 
   target 'google-examples-swiftTests' do
     inherit! :search_paths
