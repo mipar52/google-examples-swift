@@ -6,21 +6,24 @@
 //
 
 import UIKit
-import GoogleSignIn
 import GoogleAPIClientForREST
+import GoogleSignIn
 
 class DriveController: UIViewController {
     //Test spreadsheet: https://docs.google.com/spreadsheets/d/1Nm9NvZ0TOa_ifFTo7YSn1EG3eVg1O32m7QrsVeorMQQ/edit?usp=sharing
 
     let utils = Utils()
-    let scopes = [kGTLRAuthScopeSheetsSpreadsheets, kGTLRAuthScopeSheetsDrive]
-    let service = GTLRSheetsService()
+    let sheetService = GTLRSheetsService()
     let driveService = GTLRDriveService()
     
-    let sheetID = "1Nm9NvZ0TOa_ifFTo7YSn1EG3eVg1O32m7QrsVeorMQQ"
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        sheetService.apiKey = K.apiKey
+        sheetService.authorizer = GIDSignIn.sharedInstance.currentUser?.authentication.fetcherAuthorizer()
+        
+        driveService.apiKey = K.apiKey
+        driveService.authorizer = GIDSignIn.sharedInstance.currentUser?.authentication.fetcherAuthorizer()
     }
     
     @IBAction func createNewSpreadPressed(_ sender: UIButton) {
@@ -37,23 +40,19 @@ class DriveController: UIViewController {
     }
     
     @IBAction func readSpreadsPressed(_ sender: UIButton) {
-        readSpreads { (string) in
+        readSpreadsheet { (string) in
             self.utils.showAlert(title: "", message: string, vc: self)
         }
     }
 }
-extension DriveController: GIDSignInDelegate {
+
+extension DriveController {
     
-    func readSpreads (completionHandler: @escaping (String) -> Void) {
-        
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().scopes = scopes
-        GIDSignIn.sharedInstance()?.signInSilently()
+    func readSpreadsheet (completionHandler: @escaping (String) -> Void) {
         
         let query = GTLRDriveQuery_FilesList.query()
-        //mimeType='application/vnd.google-apps.spreadsheet'  mimeType='application/vnd.google-apps.folder'
         query.q = "mimeType='application/vnd.google-apps.spreadsheet' and trashed=false"
-        
+        //mimeType='application/vnd.google-apps.spreadsheet'  mimeType='application/vnd.google-apps.folder'
 //List of all files you can get from Google Drive (spreadsheets is currently selected)
 //        application/vnd.google-apps.audio
 //        application/vnd.google-apps.document     Google Docs
@@ -75,9 +74,7 @@ extension DriveController: GIDSignInDelegate {
 //More info here: https://developers.google.com/drive/api/v3/mime-types
         
         driveService.executeQuery(query, completionHandler: { ticket, files, error in
-
             if error == nil {
-                
                 let list = files as! GTLRDrive_FileList
                 let listFiles = list.files
                 
@@ -89,24 +86,17 @@ extension DriveController: GIDSignInDelegate {
                         print("Found a file: \(name), \(id)")
                     }
                 }
-            
             } else {
                 if let error = error {
                     print("Error: \(error)")
-
                     completionHandler("Error with reading files:\n\(error.localizedDescription)")
                 }
             }
         })
-        
     }
     
     func createNewSpread(completionHandler: @escaping (String) -> Void) {
         print("Creating New Sheet ...\n")
-
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().scopes = scopes
-        GIDSignIn.sharedInstance()?.signInSilently()
         
             let newSheet = GTLRSheets_Spreadsheet.init()
                  let properties = GTLRSheets_SpreadsheetProperties.init()
@@ -132,18 +122,12 @@ extension DriveController: GIDSignInDelegate {
                         completionHandler("Success!")
                       }
                   }
-                service.executeQuery(query, completionHandler: nil)
+                sheetService.executeQuery(query, completionHandler: nil)
                }
     
     func createNewSheet(completionHandler: @escaping (String) -> Void) {
         
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().scopes = scopes
-        GIDSignIn.sharedInstance()?.signInSilently()
-        
-        
         let batchUpdate = GTLRSheets_BatchUpdateSpreadsheetRequest.init()
-
         let request = GTLRSheets_Request.init()
 
         let properties = GTLRSheets_SheetProperties.init()
@@ -156,9 +140,9 @@ extension DriveController: GIDSignInDelegate {
 
         batchUpdate.requests = [request]
 
-        let createQuery = GTLRSheetsQuery_SpreadsheetsBatchUpdate.query(withObject: batchUpdate, spreadsheetId: sheetID)
+        let createQuery = GTLRSheetsQuery_SpreadsheetsBatchUpdate.query(withObject: batchUpdate, spreadsheetId: K.sheetID)
 
-        service.executeQuery(createQuery) { (ticket, result, err) in
+        sheetService.executeQuery(createQuery) { (ticket, result, err) in
             if let error = err {
                 print(error)
                 completionHandler("Error with creating sheet:\(error.localizedDescription)")
@@ -169,17 +153,4 @@ extension DriveController: GIDSignInDelegate {
             }
         }
     }
-    
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
-                  withError error: Error!) {
-            if let error = error {
-                print("Error: \(error)")
-                self.service.authorizer = nil
-                self.driveService.authorizer = nil
-
-            } else {
-                self.service.authorizer = user.authentication.fetcherAuthorizer()
-                self.driveService.authorizer = user.authentication.fetcherAuthorizer()
-            }
-        }
 }

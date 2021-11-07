@@ -8,44 +8,23 @@
 import UIKit
 import GoogleAPIClientForREST
 import GoogleSignIn
-import GTMOAuth2
-
 
 class CalendarController: UIViewController {
     
-    let scopes = [kGTLRAuthScopeCalendar]
     let calendarService = GTLRCalendarService()
-    
-    private let kClientID = "221523093975-3e37h6unj358l6oid9dn7uhppoi6pdi9.apps.googleusercontent.com"
-    
     let utils = Utils()
-    
-    let calendarId = "primary"
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().clientID = kClientID
-        GIDSignIn.sharedInstance().scopes = scopes
-        
-        if GIDSignIn.sharedInstance().hasAuthInKeychain() == false {
-            GIDSignIn.sharedInstance().signIn()
-        } else {
-            if let user = GIDSignIn.sharedInstance().currentUser {
-                calendarService.authorizer = user.authentication.fetcherAuthorizer()
-            } else {
-                GIDSignIn.sharedInstance().signInSilently()
-            }
-        }
+        calendarService.apiKey = K.apiKey
+        calendarService.authorizer = GIDSignIn.sharedInstance.currentUser?.authentication.fetcherAuthorizer()
     }
     
     @IBAction func primaryCalendarInfoPressed(_ sender: UIButton) {
-        
         getPrimaryCalendarInfo { calendar, error in
             if error == nil {
                 let id = calendar?.identifier
-                let location = calendar?.location
+                //let location = calendar?.location
                 self.utils.showAlert(title: "Primary calendar info", message: "Got primary calendar info:\nID: \(id!)", vc: self)
             } else {
                 self.utils.showAlert(title: "Error", message: "Error in getting primary calendar info:\n\(error?.localizedDescription)", vc: self)
@@ -61,7 +40,6 @@ class CalendarController: UIViewController {
                 if calendars!.count > 0 {
                     for calendar in calendars! {
                         calendarIds.append(calendar.summary!)
-                        
                     }
                     let calendarString = calendarIds.joined(separator: ", ")
                     self.utils.showAlert(title: "Subscribed calendars", message: calendarString, vc: self)
@@ -86,7 +64,6 @@ class CalendarController: UIViewController {
                 self.utils.showAlert(title: "Error", message: error!.localizedDescription, vc: self)
             }
         }
-        
     }
     
     @IBAction func createEventPressed(_ sender: UIButton) {
@@ -116,13 +93,15 @@ class CalendarController: UIViewController {
             self.utils.showAlert(title: "", message: string, vc: self)
         }
     }
-  
+}
+    extension CalendarController {
+        
 //MARK: Calendar methods
     
     //Get your calendar info
     func getPrimaryCalendarInfo(completionHandler: @escaping (GTLRCalendar_Calendar?, Error?) -> Void) {
     
-        let query = GTLRCalendarQuery_CalendarsGet.query(withCalendarId: calendarId)
+        let query = GTLRCalendarQuery_CalendarsGet.query(withCalendarId: K.calendarId)
         calendarService.executeQuery(query) { ticket, result, error in
             if error != nil {
                 completionHandler(nil, error)
@@ -150,8 +129,7 @@ class CalendarController: UIViewController {
 
         let startDateTime = GTLRDateTime(date: Calendar.current.startOfDay(for: Date()))
         let endDateTime = GTLRDateTime(date: Date().addingTimeInterval(60*60*24))
-        
-        let eventsListQuery = GTLRCalendarQuery_EventsList.query(withCalendarId: calendarId)
+        let eventsListQuery = GTLRCalendarQuery_EventsList.query(withCalendarId: K.calendarId)
         eventsListQuery.timeMin = startDateTime
         eventsListQuery.timeMax = endDateTime
 
@@ -172,11 +150,9 @@ class CalendarController: UIViewController {
         print("Meeting start: \(startDate)\nMeeting end\(endDate)")
         event.summary = "Urgent meeting help"
         event.descriptionProperty = "Please come to my meeting"
-        
         event.start = GTLRCalendar_EventDateTime()
         event.start!.dateTime = GTLRDateTime(rfc3339String: "2021-07-22T12:30:00+02:00")
         event.start!.timeZone = NSTimeZone.local.identifier
-        
         event.end = GTLRCalendar_EventDateTime()
         event.end!.dateTime = GTLRDateTime(rfc3339String: "2021-07-22T14:00:00+02:00")
         event.end!.timeZone = NSTimeZone.local.identifier
@@ -189,30 +165,26 @@ class CalendarController: UIViewController {
              attendee2.email = participantEmail
         event.attendees = [attendee1, attendee2]
         
-         let insertQuery = GTLRCalendarQuery_EventsInsert.query(withObject: event, calendarId: calendarId)
+        let insertQuery = GTLRCalendarQuery_EventsInsert.query(withObject: event, calendarId: K.calendarId)
          calendarService.executeQuery(insertQuery) { (ticket, object, error) in
                     if error != nil {
                         completionHandler(nil, error)
-
                     } else {
                         let createdEvent = object as! GTLRCalendar_Event
                         completionHandler(createdEvent, nil)
                     }
                 }
      }
-    
 //Edit an already created event
     func editEvent (eventId: String, summary: String, completionHandler: @escaping (GTLRCalendar_Event?, Error?) -> Void) {
-        let query = GTLRCalendarQuery_EventsGet.query(withCalendarId: calendarId, eventId: eventId)
-        
+        let query = GTLRCalendarQuery_EventsGet.query(withCalendarId: K.calendarId, eventId: eventId)
         calendarService.executeQuery(query, completionHandler: { (ticket, event, error) -> Void in
             if let error = error {
                 completionHandler(nil, error)
             } else {
                 let event = event as! GTLRCalendar_Event
                     event.summary = summary
-                    
-                let query = GTLRCalendarQuery_EventsUpdate.query(withObject: event, calendarId: self.calendarId, eventId: eventId)
+                let query = GTLRCalendarQuery_EventsUpdate.query(withObject: event, calendarId: K.calendarId, eventId: eventId)
                 self.calendarService.executeQuery(query) { ticket, result, error in
                     if error != nil {
                         completionHandler(nil, error)
@@ -224,12 +196,10 @@ class CalendarController: UIViewController {
             }
         })
     }
-    
  //Delete an already created event
     func deleteEvent(eventId: String, completionHandler: @escaping (String) -> Void) {
         
-        let query = GTLRCalendarQuery_EventsDelete.query(withCalendarId: calendarId, eventId: eventId)
-        
+        let query = GTLRCalendarQuery_EventsDelete.query(withCalendarId: K.calendarId, eventId: eventId)
         calendarService.executeQuery(query, completionHandler: { (ticket, event, error) -> Void in
             if let error = error {
                 completionHandler(error.localizedDescription)
@@ -237,23 +207,5 @@ class CalendarController: UIViewController {
                 completionHandler("Event deleted")
             }
         })
-    }
-}
-
-extension CalendarController: GIDSignInUIDelegate, GIDSignInDelegate {
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if user != nil {
-            calendarService.authorizer = user.authentication.fetcherAuthorizer()
-        }
-    }
-    
-    func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
-        DispatchQueue.main.async {
-            self.present(viewController, animated: true, completion: nil)
-        }
-    }
-    
-    func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
-        dismiss(animated: true, completion: nil)
     }
 }

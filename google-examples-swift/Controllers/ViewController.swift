@@ -14,8 +14,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var signInButton: UIButton!
     
-    private let scopes = [kGTLRAuthScopeSheetsSpreadsheets, kGTLRAuthScopeSheetsDrive]
-    private let driveScopes = [kGTLRAuthScopeSheetsDrive]
     private let service = GTLRSheetsService()
     private let driveService = GTLRDriveService()
     
@@ -23,53 +21,102 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().uiDelegate = self
-        GIDSignIn.sharedInstance().scopes = scopes
-        GIDSignIn.sharedInstance()?.signIn()
-
-        // Do any additional setup after loading the view.
+        googleSignIn { signInStatus in
+            if signInStatus == true {
+                self.signInButton.setTitle("Sign out", for: .normal)
+                print("Signed in!")
+            } else {
+                self.signInButton.setTitle("Sign in", for: .normal)
+                print("Issues with signing in...")
+            }
+        }
     }
-
+    
     @IBAction func signInPressed(_ sender: UIButton) {
         
         print("Sign in pressed")
         
-        if self.service.authorizer == nil{
-        GIDSignIn.sharedInstance()?.signIn()
-    
-        print("signing in....")
+        let user = GIDSignIn.sharedInstance.currentUser
+        if (user == nil) {
+            googleSignIn() { success in
+                if success == true {
+                    sender.setTitle("Sign out", for: UIControl.State.normal)
+                } else {
+                    return
+                }
+            }
+           } else {
+               GIDSignIn.sharedInstance.signOut()
+               self.service.authorizer = nil
+               sender.setTitle("Sign in", for: UIControl.State.normal)
+           }
         }
+    }
 
-        if (self.service.authorizer != nil) {
-            GIDSignIn.sharedInstance()?.signOut()
-            self.service.authorizer = nil
-            
-            sender.setTitle("Sign in", for: UIControl.State.normal)
-            print("signing out....")
+extension ViewController {
+    func googleSignIn(completionHandler: @escaping (Bool) -> Void) {
+        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+            if error == nil {
+                print("Managed to restore previous sign in!\nScopes: \(String(describing: user?.grantedScopes))")
+                
+                self.requestScopes(googleUser: user!) { success in
+                    if success == true {
+                        completionHandler(true)
+                    } else {
+                        completionHandler(false)
+                    }
+                }
+            } else {
+                print("No previous user!\nThis is the error: \(String(describing: error?.localizedDescription))")
+                let signInConfig = GIDConfiguration.init(clientID: K.clientID)
+                GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { gUser, signInError in
+                    if signInError == nil {
+                        self.requestScopes(googleUser: gUser!) { signInSuccess in
+                            if signInSuccess == true {
+                                completionHandler(true)
+                            } else {
+                                completionHandler(false)
+                            }
+                        }
+                    } else {
+                        print("error with signing in: \(String(describing: signInError)) ")
+                      self.service.authorizer = nil
+                        completionHandler(false)
+                    }
+                }
+            }
         }
     }
     
-}
-
-extension ViewController: GIDSignInDelegate, GIDSignInUIDelegate {
-    
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
-              withError error: Error!) {
-        if let error = error {
-            self.service.authorizer = nil
-            self.driveService.authorizer = nil
-            print(error)
-        } else {
-            self.driveService.authorizer = user.authentication.fetcherAuthorizer()
-            self.service.authorizer = user.authentication.fetcherAuthorizer()
-
-            signInButton.setTitle("Sign out", for: UIControl.State.normal)
-            signInButton.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: UIControl.State.normal)
-            let userName = user.profile.givenName
-            print("Hello \(String(describing: userName))!")
-
+    func requestScopes(googleUser: GIDGoogleUser, completionHandler: @escaping (Bool) -> Void) {
+        
+        let grantedScopes = googleUser.grantedScopes
+        if grantedScopes == nil || !grantedScopes!.contains(K.grantedScopes) {
+            let additionalScopes = K.additionalScopes
+            
+            GIDSignIn.sharedInstance.addScopes(additionalScopes, presenting: self) { user, scopeError in
+                if scopeError == nil {
+                    user?.authentication.do { authentication, err in
+                        if err == nil {
+                            guard let authentication = authentication else { return }
+                            // Get the access token to attach it to a REST or gRPC request.
+                           // let accessToken = authentication.accessToken
+                            let authorizer = authentication.fetcherAuthorizer()
+                            self.service.authorizer = authorizer
+                            completionHandler(true)
+                        } else {
+                            print("Error with auth: \(String(describing: err?.localizedDescription))")
+                            completionHandler(false)
+                        }
+                    }
+                } else {
+                    completionHandler(false)
+                    print("Error with adding scopes: \(String(describing: scopeError?.localizedDescription))")
+                }
             }
+        } else {
+            print("Already contains the scopes!")
+            completionHandler(true)
         }
+    }
 }
-

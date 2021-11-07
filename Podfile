@@ -7,14 +7,15 @@ target 'google-examples-swift' do
 
 
   # Pods for google-examples-swift
-	pod 'Firebase/Auth'
-	pod 'GoogleAPIClientForREST/Drive'
-	pod 'Google/SignIn'
-	pod 'GoogleAPIClientForREST/Sheets'
-  pod 'GoogleAPIClient/Calendar'
-  pod 'GoogleAPIClientForREST/Calendar'
+  pod 'Firebase/Core'
+  pod 'FirebaseAnalytics'
+  pod 'GoogleSignIn'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Crashlytics'
   pod 'GTMOAuth2'
-
+	pod 'GoogleAPIClientForREST/Drive'
+	pod 'GoogleAPIClientForREST/Sheets'
+  pod 'GoogleAPIClientForREST/Calendar'
 
   target 'google-examples-swiftTests' do
     inherit! :search_paths
