@@ -17,13 +17,13 @@ In the application, there can be found methods for:
 
 This is important to connect the application with Google services and enable and pass the scopes previously defined in the Google developer console.
 
-More information how to add Google Sign-in can be found here:
+More information how to add Google Sign-in can be found here:\
 https://developers.google.com/identity/sign-in/ios/start-integrating
 
-Google Sign-in code integration:
+Google Sign-in code integration:\
 https://developers.google.com/identity/sign-in/ios/sign-in
 
-Requesting and adding scopes (accessing different Google APIs):
+Requesting and adding scopes (accessing different Google APIs):\
 https://developers.google.com/identity/sign-in/ios/api-access
 
 ### Google Spreadsheets:
