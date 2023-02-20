@@ -1,4 +1,4 @@
-A simple application demonstrating the usage of Google Sign-in, Google Sheets, Google Drive and Google Calendar REST APIs.
+A simple application demonstrating the usage of Google Sign-in, Google Sheets, Google Drive, Google Calendar, and YouTube Data REST APIs.
 
 Sign in and all of the pre-requirements to enable the usage of Google REST APIs can be found here:
 
@@ -57,6 +57,21 @@ https://developers.google.com/identity/sign-in/ios/api-access
     5. Edit an event
     
     6. Delete an event
+
+### YouTube Data API
+
+    1. Get search list
+
+    2. Get playlist videos
+
+    3. Upload video
+    
+    4. Delete video
+    
+    5. Update video
+    
+    6. Insert comment
+
 
 ### Run the project 
 
