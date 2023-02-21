@@ -36,6 +36,8 @@ https://developers.google.com/identity/sign-in/ios/api-access
 
     4. Get all of the Sheets from a Spreadsheet
 
+Examples can be found in the [SpredsheetsController](https://github.com/mipar52/google-examples-swift/blob/master/google-examples-swift/Controllers/SpredsheetsController.swift).
+
 ### Google Drive:
 
     1. Get information from files on your Google Drive
@@ -44,6 +46,9 @@ https://developers.google.com/identity/sign-in/ios/api-access
 
     3. Create new Sheets in a selected Spreadsheet
     
+
+Examples can be found in the [DriveController](https://github.com/mipar52/google-examples-swift/blob/master/google-examples-swift/Controllers/DriveController.swift).
+
 ### Google Calendar
 
     1. Get primary calendar info
@@ -57,6 +62,8 @@ https://developers.google.com/identity/sign-in/ios/api-access
     5. Edit an event
     
     6. Delete an event
+
+Examples can be found in the [CalendarController](https://github.com/mipar52/google-examples-swift/blob/master/google-examples-swift/Controllers/CalendarController.swift).
 
 ### YouTube Data API
 
@@ -72,6 +79,7 @@ https://developers.google.com/identity/sign-in/ios/api-access
     
     6. Insert comment
 
+Examples can be found in the [YouTubeController](https://github.com/mipar52/google-examples-swift/blob/master/google-examples-swift/Controllers/YouTubeController.swift).
 
 ### Run the project 
 
