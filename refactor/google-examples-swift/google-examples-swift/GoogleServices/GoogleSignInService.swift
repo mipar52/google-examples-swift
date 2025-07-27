@@ -62,8 +62,7 @@ struct GoogleSignInService {
             presenting: rootVc) { signInResult, error in
             guard error == nil else { return }
             guard let signInResult = signInResult else { return }
-            
-            print(signInResult.user.grantedScopes)
+                
             // Check if the user granted access to the scopes you requested.
             completion(signInResult, error)
         }

@@ -8,6 +8,8 @@
 import Foundation
 
 struct Constants {
+    static let apiKey = "AIzaSyDvU-dCjHmT2CoZVou2uZL0yGhaXxJVDiE"
+    
     static let additionalScopes = ["https://www.googleapis.com/auth/spreadsheets",
                                    "https://www.googleapis.com/auth/drive",
                                    "https://www.googleapis.com/auth/drive.file",
@@ -17,4 +19,6 @@ struct Constants {
                                    "https://www.googleapis.com/auth/youtube.upload",
                                    "https://www.googleapis.com/auth/youtubepartner"]
                                     //"https://www.googleapis.com/auth/youtube.readonly"]
+    
+    static let sheetID = "1Nm9NvZ0TOa_ifFTo7YSn1EG3eVg1O32m7QrsVeorMQQ"
 }

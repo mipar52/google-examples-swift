@@ -12,12 +12,12 @@ import GoogleSignIn
 struct google_examples_swiftApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GoogleSignInView()
                 .onAppear {
                     GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
                         print("User: \(String(describing: user?.description))")
                         print("Restore error: \(error?.localizedDescription)")
-                      // Check if `user` exists; otherwise, do something with `error`
+                        // Check if `user` exists; otherwise, do something with `error`
                     }
                 }
                 .onOpenURL { url in

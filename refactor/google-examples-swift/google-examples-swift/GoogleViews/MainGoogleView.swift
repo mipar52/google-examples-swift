@@ -14,7 +14,11 @@ struct MainGoogleView: View {
         } label: {
             Text("Google Spreadsheets")
         }
-
+        NavigationLink {
+            DriveView()
+        } label: {
+            Text("Google Drive")
+        }
     }
 }
 
