@@ -12,47 +12,73 @@ import SafariServices
 
 struct ContentView: View {
     @State var isSignedIn: Bool = false
+    @State var user: String = ""
+    
     var body: some View {
-        VStack(spacing: 15) {
-            Text("Welcome to Google Examples Swift!")
-            
-            if !isSignedIn {
-                GoogleSignInButton(action: handleSignInButton)
-                .frame(width: 50, height: 50)
-            }
-            
-            if isSignedIn {
-                Text("Signed in!")
-                Button {
+        NavigationView {
+            VStack(spacing: 15) {
+                Text("Welcome to Google Examples Swift!")
+                
+                if !isSignedIn {
+        
+                    // handle sign in and ask the user to additionally grant the scopes for
+                    // other Google services, like the Drive, Sheets, YouTube, etc.
+                    GoogleSignInButton(action: {
+                        GoogleSignInService.handleSignInWithAdditionalScopes(getRootVC()!) { result, error in
+                            // handle result and error here
+                            if let error = error {
+                                print("Error: \(error)")
+                            } else if let result = result {
+                                user = result.user.profile?.name ?? "Unknown"
+                                isSignedIn.toggle()
+                            }
+                        }
+                    })
+                    .frame(width: 50, height: 50)
                     
-                } label: {
-                    Text("Proceed to Google Examples")
+                    // for doing the flow sign in + request additional scopes later
+                    // check the GoogleSingInSetvice, method handleSignIn & requestAdditionalScopes
+                    /**
+                     GoogleSignInButton(action:  {
+                         GoogleSignInService.handleSignIn(getRootVC()!) { result, error in
+                             // handle result and error here
+                             if let error = error {
+                                 print("Error: \(error)")
+                             } else if let result = result {
+                                 user = result.user.profile?.name ?? "Unknown"
+                                 isSignedIn.toggle()
+                             }
+                         }
+                     })
+                     .frame(width: 50, height: 50)
+                     */
                 }
                 
-                Button {
-                    GIDSignIn.sharedInstance.signOut()
-                    isSignedIn.toggle()
-                } label: {
-                    Text("Sign out")
+                if isSignedIn {
+                    Text("Signed in! Hello: \(user)")
+                    NavigationLink {
+                        MainGoogleView()
+                    } label: {
+                        Text("Proceed to Google Examples")
+                    }
+                    
+                    Button {
+                        GoogleSignInService.signOut()
+                        isSignedIn.toggle()
+                    } label: {
+                        Text("Sign out")
+                    }
                 }
             }
+            .padding()
         }
-        .padding()
     }
-    func handleSignInButton() {
-        guard let rootViewController = Utilities.getTopViewController() else {
-            return
+    
+    private func getRootVC() -> UIViewController? {
+        guard let rootVC = Utilities.getTopViewController() else {
+            return nil
         }
-        
-      GIDSignIn.sharedInstance.signIn(
-        withPresenting: rootViewController) { signInResult, error in
-          guard let result = signInResult else {
-            return
-          }
-            
-            print(result.user.profile?.email)
-            isSignedIn.toggle()
-        }
+        return rootVC
     }
 }
 
