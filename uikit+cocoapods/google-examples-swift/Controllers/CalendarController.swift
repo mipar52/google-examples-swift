@@ -16,8 +16,24 @@ class CalendarController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        calendarService.apiKey = K.apiKey
-        calendarService.authorizer = GIDSignIn.sharedInstance.currentUser?.authentication.fetcherAuthorizer()
+        guard let currentUser = GIDSignIn.sharedInstance.currentUser else {
+            print("No current user")
+            return
+        }
+
+        currentUser.refreshTokensIfNeeded { user, error in
+            guard error == nil else { return }
+            guard let user = user else { return }
+
+            // Get the access token to attach it to a REST or gRPC request.
+            let accessToken = user.accessToken.tokenString
+            self.calendarService.additionalHTTPHeaders = ["Authorization": "Bearer \(accessToken)"]
+            
+            // Or, get an object that conforms to GTMFetcherAuthorizationProtocol for
+            // use with GTMAppAuth and the Google APIs client library.
+            let authorizer = user.fetcherAuthorizer
+            self.calendarService.authorizer = authorizer
+        }
     }
     
     @IBAction func primaryCalendarInfoPressed(_ sender: UIButton) {
