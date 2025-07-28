@@ -20,4 +20,6 @@ struct Constants {
     
     static let sheetID = "1Nm9NvZ0TOa_ifFTo7YSn1EG3eVg1O32m7QrsVeorMQQ"
     static let calendarId = "primary"
+    static let youTubePlaylistId = "PLopY4n17t8RCflNiDpZcNKRmugF-W-S0o"
+    static let bingingWithBabishPlaylist = "https://www.youtube.com/watch?v=1-i_7K02S14&list=PLopY4n17t8RCflNiDpZcNKRmugF-W-S0o"
 }

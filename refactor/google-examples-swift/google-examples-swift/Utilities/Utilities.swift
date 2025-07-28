@@ -7,7 +7,9 @@
 
 import Foundation
 import UIKit
+import MobileCoreServices
 
+/// Various utilites for making the API calling easier
 struct Utilities {
     static func getTopViewController() -> UIViewController? {
         guard let windowScene = UIApplication.shared
@@ -26,5 +28,27 @@ struct Utilities {
         }
 
         return topController
+    }
+    
+    //Helper method for getting the apps Bundle ID
+    static func getBundleId() -> String {
+            var bundleIdentifier = Bundle.main.bundleIdentifier
+            bundleIdentifier = bundleIdentifier?.trimmingCharacters(in: .whitespaces)
+            if let bundleIdentifier = bundleIdentifier {
+                return bundleIdentifier
+            } else {
+                return ""
+            }
+        }
+    
+    static func mimeTypeForPath(fileUrl: URL) -> String {
+        
+        let pathExtension = fileUrl.pathExtension
+        if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as NSString, nil)?.takeRetainedValue() {
+            if let mimetype = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue() {
+                return mimetype as String
+            }
+        }
+        return "application/octet-stream"
     }
 }

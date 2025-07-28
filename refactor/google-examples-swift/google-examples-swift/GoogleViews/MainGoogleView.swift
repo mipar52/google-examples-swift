@@ -9,20 +9,27 @@ import SwiftUI
 
 struct MainGoogleView: View {
     var body: some View {
-        NavigationLink {
-            SpreadsheetView()
-        } label: {
-            Text("Google Spreadsheets")
-        }
-        NavigationLink {
-            DriveView()
-        } label: {
-            Text("Google Drive")
-        }
-        NavigationLink {
-            CalendarView()
-        } label: {
-            Text("Google Calendar")
+        VStack(spacing: 20) {
+            NavigationLink {
+                SpreadsheetView()
+            } label: {
+                Text("Google Spreadsheets")
+            }
+            NavigationLink {
+                DriveView()
+            } label: {
+                Text("Google Drive")
+            }
+            NavigationLink {
+                CalendarView()
+            } label: {
+                Text("Google Calendar")
+            }
+            NavigationLink {
+                YouTubeView()
+            } label: {
+                Text("YouTube Services")
+            }
         }
     }
 }

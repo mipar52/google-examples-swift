@@ -12,7 +12,7 @@ struct CalendarView: View {
     @State private var presentAlert: Bool = false
     @State private var alertMessage: String = ""
     var body: some View {
-        VStack {
+        VStack(spacing: 20) {
             
             Button {
                 calendarService.getPrimaryCalendarInfo { calendar, error in
