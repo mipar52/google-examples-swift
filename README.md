@@ -1,4 +1,4 @@
-# 📘 Google API Integration Examples in Swift
+# Google API Integration Examples in Swift
 
 This project provides practical, fully working Swift examples demonstrating how to integrate several key **Google APIs** into an iOS application using **SwiftUI**, **Swift Concurrency (`async/await`)**, and traditional **completion handlers**.
 
