@@ -141,7 +141,7 @@ https://developers.google.com/identity/sign-in/ios/api-access
 ## 🔐 Google Sign-In Integration
 
 This project includes a fully working implementation of **Google Sign-In** using Swift and SwiftUI.
-- Google Sign in examples can be found [here](https://github.com/mipar52/google-examples-swift/blob/feature/refactor/refactor/google-examples-swift/google-examples-swift/GoogleServices/GoogleSignInService.swift).
+- Google Sign in examples can be found [here](https://github.com/mipar52/google-examples-swift/blob/master/google-examples-swift/GoogleServices/GoogleSignInService.swift).
 
 The `GoogleSignInService` wraps the `GIDSignIn` SDK and provides a clean, Swift-native API for:
 
@@ -185,7 +185,7 @@ struct google_examples_swiftApp: App {
 ```
 
 ## Google Drive API
-- Google Drive examples can be found [here](https://github.com/mipar52/google-examples-swift/blob/feature/refactor/refactor/google-examples-swift/google-examples-swift/GoogleServices/GoogleDriveService.swift).
+- Google Drive examples can be found [here](https://github.com/mipar52/google-examples-swift/blob/master/google-examples-swift/GoogleServices/GoogleDriveService.swift).
 
 The `GoogleDriveService` provides a high-level interface for interacting with the **Google Drive** and **Google Sheets** APIs using modern Swift practices including `async/await` and completion handlers.  
 It simplifies reading, creating, downloading, and managing files in Google Drive and Sheets directly from a SwiftUI iOS app.
@@ -302,7 +302,7 @@ Task {
 ```
 
 ## Google Spreadsheets
-- Google Spreadsheet examples can be found [here](https://github.com/mipar52/google-examples-swift/blob/feature/refactor/refactor/google-examples-swift/google-examples-swift/GoogleServices/GoogleDriveService.swift).
+- Google Spreadsheet examples can be found [here](https://github.com/mipar52/google-examples-swift/blob/master/google-examples-swift/GoogleServices/GoogleSheetsService.swift).
 - The `GoogleSheetsService` provides a streamlined way to interact with the **Google Sheets API** from a SwiftUI-based iOS app. It uses modern Swift concurrency (`async/await`) and completion handlers to demonstrate how to append, write, read, and fetch spreadsheet data with ease.
 
 ---
@@ -378,7 +378,7 @@ sheetsService.readData { result in
 ---
 
 ## Google Calendar API
-- Google Calendar examples can be found [here](https://github.com/mipar52/google-examples-swift/blob/feature/refactor/refactor/google-examples-swift/google-examples-swift/GoogleServices/GoogleDriveService.swift).
+- Google Calendar examples can be found [here](https://github.com/mipar52/google-examples-swift/blob/master/google-examples-swift/GoogleServices/GoogleCalendarService.swift).
 
 - The `GoogleCalendarService` simplifies working with the **Google Calendar API** in modern Swift/iOS apps using Swift concurrency and completion handlers. It enables users to authenticate, manage calendars, and handle events (create, list, update, delete) with clean and SwiftUI-compatible logic.
 
@@ -487,7 +487,7 @@ calendarService.listEvents { eventsInfo in
 
 ## YouTube API
 
-- YouTube API examples can be found [here](https://github.com/mipar52/google-examples-swift/blob/feature/refactor/refactor/google-examples-swift/google-examples-swift/GoogleServices/GoogleDriveService.swift).
+- YouTube API examples can be found [here](https://github.com/mipar52/google-examples-swift/blob/master/google-examples-swift/GoogleServices/YouTubeService.swift).
 
 - The `YouTubeService` gives your SwiftUI app full access to interact with the **YouTube Data API v3**, including features such as video upload, metadata editing, comment handling, and playlist management.
 
@@ -596,17 +596,4 @@ ytService.uploadVideoFile(locationURL: someURL) { status in
     print(status)
 }
 ```
-
 ---
-
-### Run the project 
-
-    1. Make sure you're you've registered your project on Firebase and Google developers console
-
-    2. Add the wanted scopes regarding each REST API in the Google developer console
-
-    3. Add the GoogleService-Info.plist to your Xcode project
-    
-    4. In the GoogleService-Info.plist file, copy the REVERSED_CLIENT_ID and go to project TARGETS > Info > URL Types and add the reversed ID in the URL Schemes
-    
-    5. Run command  `pod install` when positioned yourself in the project's directory in Terminal
