@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A11DCBAE2E361D6A00C55248 /* GoogleAPIClientForREST_Sheets in Frameworks */ = {isa = PBXBuildFile; productRef = A11DCBAD2E361D6A00C55248 /* GoogleAPIClientForREST_Sheets */; };
 		A11DCBB02E3622DE00C55248 /* GoogleAPIClientForREST_Drive in Frameworks */ = {isa = PBXBuildFile; productRef = A11DCBAF2E3622DE00C55248 /* GoogleAPIClientForREST_Drive */; };
+		A11DCBDB2E3754E900C55248 /* GoogleAPIClientForREST_Calendar in Frameworks */ = {isa = PBXBuildFile; productRef = A11DCBDA2E3754E900C55248 /* GoogleAPIClientForREST_Calendar */; };
 		A164B6602E356D6D009DE1D1 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = A164B65F2E356D6D009DE1D1 /* GoogleSignIn */; };
 		A164B6622E356D6D009DE1D1 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A164B6612E356D6D009DE1D1 /* GoogleSignInSwift */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 			files = (
 				A11DCBB02E3622DE00C55248 /* GoogleAPIClientForREST_Drive in Frameworks */,
 				A164B6602E356D6D009DE1D1 /* GoogleSignIn in Frameworks */,
+				A11DCBDB2E3754E900C55248 /* GoogleAPIClientForREST_Calendar in Frameworks */,
 				A164B6622E356D6D009DE1D1 /* GoogleSignInSwift in Frameworks */,
 				A11DCBAE2E361D6A00C55248 /* GoogleAPIClientForREST_Sheets in Frameworks */,
 			);
@@ -101,6 +103,7 @@
 				A164B6612E356D6D009DE1D1 /* GoogleSignInSwift */,
 				A11DCBAD2E361D6A00C55248 /* GoogleAPIClientForREST_Sheets */,
 				A11DCBAF2E3622DE00C55248 /* GoogleAPIClientForREST_Drive */,
+				A11DCBDA2E3754E900C55248 /* GoogleAPIClientForREST_Calendar */,
 			);
 			productName = "google-examples-swift";
 			productReference = A164B64E2E356CE1009DE1D1 /* google-examples-swift.app */;
@@ -396,6 +399,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A11DCBAB2E361D0800C55248 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
 			productName = GoogleAPIClientForREST_Drive;
+		};
+		A11DCBDA2E3754E900C55248 /* GoogleAPIClientForREST_Calendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A11DCBAB2E361D0800C55248 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_Calendar;
 		};
 		A164B65F2E356D6D009DE1D1 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;

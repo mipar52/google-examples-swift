@@ -19,6 +19,11 @@ struct MainGoogleView: View {
         } label: {
             Text("Google Drive")
         }
+        NavigationLink {
+            CalendarView()
+        } label: {
+            Text("Google Calendar")
+        }
     }
 }
 
