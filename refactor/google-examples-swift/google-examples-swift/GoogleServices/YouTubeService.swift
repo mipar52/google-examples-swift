@@ -104,6 +104,8 @@ struct YouTubeService {
     func uploadVideoFile(locationURL: URL, completionHandler: @escaping (String) -> Void) {
         
         let status = GTLRYouTube_VideoStatus()
+        // don't worry, the uploaded video is set to private,
+        // so only you can see it on your YouTube channel.
             status.privacyStatus = "private"
         
         let snippet = GTLRYouTube_VideoSnippet()
@@ -136,7 +138,6 @@ struct YouTubeService {
             stringResult = error.localizedDescription
         }
         
-        let filename = fileToUploadURL.lastPathComponent
         let mimeType = Utilities.mimeTypeForPath(fileUrl: fileToUploadURL)
         print("mimeType: \(mimeType)")
         
@@ -152,7 +153,7 @@ struct YouTubeService {
             if ytError == nil {
                 if let uploadedVideo = uploadedVideo as? GTLRYouTube_Video {
                     print("Video ID: https://www.youtube.com/watch?v=\(uploadedVideo.identifier!)")
-                    stringResult = "Video \(String(describing: uploadedVideo.snippet?.title)) uploaded!"
+                    stringResult = "Video \(String(describing: uploadedVideo.snippet?.title)) uploaded!\nLink: https://www.youtube.com/watch?v=\(uploadedVideo.identifier!)"
                 } else {
                     
                     stringResult = "Could not upload video!"
@@ -165,7 +166,9 @@ struct YouTubeService {
     }
     
     func deleteVideo(completionHandler: @escaping (String) -> Void) {
-        let query = GTLRYouTubeQuery_VideosDelete.query(withIdentifier: "your-video-id")
+        // the videoID is something like this: lXW7_oAcT84
+        // https://www.youtube.com/watch?v=lXW7_oAcT84
+        let query = GTLRYouTubeQuery_VideosDelete.query(withIdentifier: "lXW7_oAcT84")
             youTubeService.executeQuery(query) { ticket, _, ytError in
                 if ytError == nil {
                     completionHandler("Video deleted!")
@@ -193,7 +196,9 @@ struct YouTubeService {
         snippet.categoryId = "22"
         
         let video = GTLRYouTube_Video()
-        video.identifier = "your-video-id"
+        // the videoID is something like this: lXW7_oAcT84
+        // https://www.youtube.com/watch?v=lXW7_oAcT84
+        video.identifier = "lXW7_oAcT84"
         video.status = status
         video.snippet = snippet
         
@@ -207,17 +212,70 @@ struct YouTubeService {
         }
     }
     
-    func insertComment(completionHandler: @escaping (String) -> Void) {
-        let comment = GTLRYouTube_Comment()
-        let snippet = GTLRYouTube_CommentSnippet()
+    func getAllCommentFromVideo(completionHandler: @escaping (String) -> Void) {
         
-        snippet.videoId = "your-video-id"
-        snippet.textOriginal = "Hello there!"
-        snippet.parentId = "comment-parent-id" // -> This property is only set if the comment was submitted as a reply to another comment.
+        let query = GTLRYouTubeQuery_CommentThreadsList.query(withPart: ["snippet"])
+        query.videoId = "FXrcFeuYtq8"
+        query.order = "relevance" // "time" is default
+        query.additionalHTTPHeaders = ["X-Ios-Bundle-Identifier" : Utilities.getBundleId()]
+
+        youTubeService.executeQuery(query) { ticket, result, ytError in
+            if ytError == nil {
+                var stringResult = String()
+                if let commentsResult = result as? GTLRYouTube_CommentThreadListResponse {
+                    commentsResult.items?.forEach {
+                        print($0.snippet?.topLevelComment?.identifier)
+                        stringResult += "Comment: \(String(describing: $0.snippet?.topLevelComment?.snippet?.textOriginal)) - number of likes: \($0.snippet?.topLevelComment?.snippet?.likeCount?.intValue ?? 0)\n\n"
+                    }
+                }
+                completionHandler(stringResult)
+            } else {
+                completionHandler("Insert comment error: \(String(describing: ytError?.localizedDescription))")
+            }
+        }
+    }
+    func getAllCommentRepliesFromThread(completionHandler: @escaping (String) -> Void) {
         
-        comment.snippet = snippet
+        let query = GTLRYouTubeQuery_CommentsList.query(withPart: ["snippet"])
+        // ID of the top-comment (thread)
+        query.parentId = "Ugzwpx68YLrjZIrIIGh4AaABAg"
+        query.additionalHTTPHeaders = ["X-Ios-Bundle-Identifier" : Utilities.getBundleId()]
+
+        youTubeService.executeQuery(query) { ticket, result, ytError in
+            if ytError == nil {
+                var stringResult = String()
+                if let commentsResult = result as? GTLRYouTube_CommentListResponse {
+                    commentsResult.items?.forEach {
+                        stringResult += "Comment Author: \(String(describing: $0.snippet?.authorDisplayName)) - Text: \(String(describing: $0.snippet?.textOriginal))\n\n"
+                    }
+                }
+                completionHandler(stringResult)
+            } else {
+                completionHandler("Insert comment error: \(String(describing: ytError?.localizedDescription))")
+            }
+        }
+    }
     
-        let query = GTLRYouTubeQuery_CommentsInsert.query(withObject: comment, part: ["id","snippet"])
+    func insertComment(completionHandler: @escaping (String) -> Void) {
+        let commentThread = GTLRYouTube_CommentThread()
+        let threadSnippet = GTLRYouTube_CommentThreadSnippet()
+        // the videoID is something like this: ojMsPVVZqdg
+        // https://www.youtube.com/watch?v=ojMsPVVZqdg
+        threadSnippet.videoId = "ojMsPVVZqdg"
+        threadSnippet.channelId = "@babishculinaryunivers"
+        
+        let comment = GTLRYouTube_Comment()
+        let commentSnippet = GTLRYouTube_CommentSnippet()
+        commentSnippet.textOriginal = "Hello world!"
+        comment.snippet = commentSnippet
+        
+        threadSnippet.topLevelComment = comment
+        commentThread.snippet = threadSnippet
+        
+        // watch out, this will post a comment
+        // on the https://www.youtube.com/watch?v=ojMsPVVZqdg video :)
+    
+        let query = GTLRYouTubeQuery_CommentThreadsInsert.query(withObject: commentThread, part: ["snippet"])
         query.additionalHTTPHeaders = ["X-Ios-Bundle-Identifier" : Utilities.getBundleId()]
 
         youTubeService.executeQuery(query) { ticket, _, ytError in
@@ -227,6 +285,5 @@ struct YouTubeService {
                 completionHandler("Insert comment error: \(String(describing: ytError?.localizedDescription))")
             }
         }
-
     }
 }
