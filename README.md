@@ -77,7 +77,8 @@ This project uses **Swift Package Manager** and is written entirely in Swift + S
 
 ## Legacy UIKit Version with CocoaPods
 
-If you're using a UIKit-based codebase or prefer working with CocoaPods, check out the `uikit_cocoapods` project.
+If you're using a UIKit-based codebase or prefer working with CocoaPods, check out the `uikit+cocoapods` folder.\
+The project is still fully functional and most of the examples are implemented, it just takes a little bit more work on the implementation side.
 
 This version contains:
 
@@ -87,9 +88,19 @@ This version contains:
 - Instructions:
 
 ```bash
+# git clone
 git clone https://github.com/your-org/google-examples-swift.git
+
+# go to the project directory
+cd uikit+cocoapods
+
+# run pod install to install the dependencies
 pod install
+
+# open the xcworkspace project
 open google-examples-uikit.xcworkspace
+
+# run the project on simulator or a physical device
 ```
 
 ## Important links for integration

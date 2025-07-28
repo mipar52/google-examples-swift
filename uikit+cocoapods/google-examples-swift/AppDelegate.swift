@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Previous sign in restored!")
         }
       }
-    FirebaseApp.configure()
+    //FirebaseApp.configure()
     return true
     }
 

@@ -13,10 +13,6 @@ import GoogleAPIClientForREST
 class ViewController: UIViewController {
     
     @IBOutlet weak var signInButton: UIButton!
-    
-    private let service = GTLRSheetsService()
-    private let driveService = GTLRDriveService()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +43,6 @@ class ViewController: UIViewController {
             }
            } else {
                GIDSignIn.sharedInstance.signOut()
-               self.service.authorizer = nil
                sender.setTitle("Sign in", for: UIControl.State.normal)
            }
         }
@@ -69,18 +64,19 @@ extension ViewController {
             } else {
                 print("No previous user!\nThis is the error: \(String(describing: error?.localizedDescription))")
                 let signInConfig = GIDConfiguration.init(clientID: K.clientID)
-                GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { gUser, signInError in
+                GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, signInError in
                     if signInError == nil {
-                        self.requestScopes(googleUser: gUser!) { signInSuccess in
-                            if signInSuccess == true {
-                                completionHandler(true)
-                            } else {
-                                completionHandler(false)
+                        if let user = signInResult?.user {
+                            self.requestScopes(googleUser: user) { signInSuccess in
+                                if signInSuccess == true {
+                                    completionHandler(true)
+                                } else {
+                                    completionHandler(false)
+                                }
                             }
                         }
                     } else {
                         print("error with signing in: \(String(describing: signInError)) ")
-                      self.service.authorizer = nil
                         completionHandler(false)
                     }
                 }
@@ -93,26 +89,12 @@ extension ViewController {
         let grantedScopes = googleUser.grantedScopes
         if grantedScopes == nil || !grantedScopes!.contains(K.grantedScopes) {
             let additionalScopes = K.additionalScopes
-            
-            GIDSignIn.sharedInstance.addScopes(additionalScopes, presenting: self) { user, scopeError in
-                if scopeError == nil {
-                    user?.authentication.do { authentication, err in
-                        if err == nil {
-                            guard let authentication = authentication else { return }
-                            // Get the access token to attach it to a REST or gRPC request.
-                           // let accessToken = authentication.accessToken
-                            let authorizer = authentication.fetcherAuthorizer()
-                            self.service.authorizer = authorizer
-                            completionHandler(true)
-                        } else {
-                            print("Error with auth: \(String(describing: err?.localizedDescription))")
-                            completionHandler(false)
-                        }
-                    }
-                } else {
-                    completionHandler(false)
-                    print("Error with adding scopes: \(String(describing: scopeError?.localizedDescription))")
-                }
+            googleUser.addScopes(additionalScopes, presenting: self) { signInResult, signInError in
+                guard signInError == nil else { completionHandler(false); return }
+                guard let signInResult = signInResult else {completionHandler(false); return }
+                print(signInResult.description)
+                // Check if the user granted access to the scopes you requested.
+                completionHandler(true)
             }
         } else {
             print("Already contains the scopes!")

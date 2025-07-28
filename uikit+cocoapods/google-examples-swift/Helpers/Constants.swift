@@ -9,7 +9,6 @@ import Foundation
 
 public struct K {
     static let clientID = "221523093975-3e37h6unj358l6oid9dn7uhppoi6pdi9.apps.googleusercontent.com"
-    static let apiKey = "AIzaSyDvU-dCjHmT2CoZVou2uZL0yGhaXxJVDiE"
     
     static let grantedScopes = "https://www.googleapis.com/auth/spreadsheets"
     static let additionalScopes = ["https://www.googleapis.com/auth/spreadsheets",
