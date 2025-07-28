@@ -10,7 +10,6 @@
 		01A3C6B142D4C0630E1982EB /* Pods_google_examples_swift_google_examples_swiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F02A619D31539DADA9441FB /* Pods_google_examples_swift_google_examples_swiftUITests.framework */; };
 		51B1CAB1F6DF878C63A2487A /* Pods_google_examples_swiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76061A2CC2E1EEE3E690D154 /* Pods_google_examples_swiftTests.framework */; };
 		A14149CF2738380D00910A31 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14149CE2738380D00910A31 /* Constants.swift */; };
-		A150D76126A8557000318377 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A150D76026A8557000318377 /* GoogleService-Info.plist */; };
 		A1AE23B225CFE59B00371F21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AE23B125CFE59B00371F21 /* AppDelegate.swift */; };
 		A1AE23B425CFE59B00371F21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AE23B325CFE59B00371F21 /* SceneDelegate.swift */; };
 		A1AE23B625CFE59B00371F21 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AE23B525CFE59B00371F21 /* ViewController.swift */; };
@@ -24,7 +23,6 @@
 		A1AE243125CFF1FC00371F21 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AE243025CFF1FC00371F21 /* utils.swift */; };
 		A1B6E00126A7FAD100D0C8A2 /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B6E00026A7FAD100D0C8A2 /* CalendarController.swift */; };
 		A1FE4FC1299F76CD003771FE /* YouTubeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FE4FC0299F76CD003771FE /* YouTubeController.swift */; };
-		A1FE4FF3299FDD62003771FE /* 37090ec5-b49d-430b-a6f2-b299ccb4b220.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = A1FE4FF2299FDD62003771FE /* 37090ec5-b49d-430b-a6f2-b299ccb4b220.MP4 */; };
 		D6EDD4E845D5F58DB69FD183 /* Pods_google_examples_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EBB791004B001E45413B6FF /* Pods_google_examples_swift.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,7 +53,6 @@
 		6B45ECC4346FE0585FE2F0F5 /* Pods-google-examples-swift-google-examples-swiftUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-google-examples-swift-google-examples-swiftUITests.release.xcconfig"; path = "Target Support Files/Pods-google-examples-swift-google-examples-swiftUITests/Pods-google-examples-swift-google-examples-swiftUITests.release.xcconfig"; sourceTree = "<group>"; };
 		76061A2CC2E1EEE3E690D154 /* Pods_google_examples_swiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_google_examples_swiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A14149CE2738380D00910A31 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		A150D76026A8557000318377 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A1AE23AE25CFE59B00371F21 /* google-examples-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "google-examples-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1AE23B125CFE59B00371F21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1AE23B325CFE59B00371F21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,7 +72,6 @@
 		A1AE243025CFF1FC00371F21 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		A1B6E00026A7FAD100D0C8A2 /* CalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
 		A1FE4FC0299F76CD003771FE /* YouTubeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeController.swift; sourceTree = "<group>"; };
-		A1FE4FF2299FDD62003771FE /* 37090ec5-b49d-430b-a6f2-b299ccb4b220.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "37090ec5-b49d-430b-a6f2-b299ccb4b220.MP4"; sourceTree = "<group>"; };
 		DAD197E747E22CF719730617 /* Pods-google-examples-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-google-examples-swift.release.xcconfig"; path = "Target Support Files/Pods-google-examples-swift/Pods-google-examples-swift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,7 +150,6 @@
 		A1AE23B025CFE59B00371F21 /* google-examples-swift */ = {
 			isa = PBXGroup;
 			children = (
-				A1FE4FF1299FDD54003771FE /* Video */,
 				A1AE244225D0085500371F21 /* Controllers */,
 				A14149D02738381F00910A31 /* Helpers */,
 				A1AE23B125CFE59B00371F21 /* AppDelegate.swift */,
@@ -162,7 +157,6 @@
 				A1AE23B725CFE59B00371F21 /* Main.storyboard */,
 				A1AE23BA25CFE59C00371F21 /* Assets.xcassets */,
 				A1AE23BC25CFE59C00371F21 /* LaunchScreen.storyboard */,
-				A150D76026A8557000318377 /* GoogleService-Info.plist */,
 				A1AE23BF25CFE59C00371F21 /* Info.plist */,
 			);
 			path = "google-examples-swift";
@@ -196,14 +190,6 @@
 				A1FE4FC0299F76CD003771FE /* YouTubeController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		A1FE4FF1299FDD54003771FE /* Video */ = {
-			isa = PBXGroup;
-			children = (
-				A1FE4FF2299FDD62003771FE /* 37090ec5-b49d-430b-a6f2-b299ccb4b220.MP4 */,
-			);
-			path = Video;
 			sourceTree = "<group>";
 		};
 		F38717F4074B12EB48745EF5 /* Frameworks */ = {
@@ -326,8 +312,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1AE23BE25CFE59C00371F21 /* LaunchScreen.storyboard in Resources */,
-				A150D76126A8557000318377 /* GoogleService-Info.plist in Resources */,
-				A1FE4FF3299FDD62003771FE /* 37090ec5-b49d-430b-a6f2-b299ccb4b220.MP4 in Resources */,
 				A1AE23BB25CFE59C00371F21 /* Assets.xcassets in Resources */,
 				A1AE23B925CFE59B00371F21 /* Main.storyboard in Resources */,
 			);
