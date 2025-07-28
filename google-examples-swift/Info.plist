@@ -2,78 +2,30 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
-	<key>CFBundlePackageType</key>
-	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>UIFileSharingEnabled</key>
+	<true/>
+	<key>BUNDLE_ID</key>
+	<string>com.mipar52.google-examples-swift</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleIdentifier</key>
-			<string></string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>GIDClient</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.221523093975-3e37h6unj358l6oid9dn7uhppoi6pdi9</string>
+				<string>com.googleusercontent.apps.221523093975-jr6o0k2k9m0t0v05463i0u8umta22vp5</string>
 			</array>
 		</dict>
 	</array>
-	<key>CFBundleVersion</key>
-	<string>1</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>UIApplicationSceneManifest</key>
-	<dict>
-		<key>UIApplicationSupportsMultipleScenes</key>
-		<false/>
-		<key>UISceneConfigurations</key>
-		<dict>
-			<key>UIWindowSceneSessionRoleApplication</key>
-			<array>
-				<dict>
-					<key>UISceneConfigurationName</key>
-					<string>Default Configuration</string>
-					<key>UISceneDelegateClassName</key>
-					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-					<key>UISceneStoryboardFile</key>
-					<string>Main</string>
-				</dict>
-			</array>
-		</dict>
-	</dict>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
+	<key>GIDClientID</key>
+	<string>221523093975-jr6o0k2k9m0t0v05463i0u8umta22vp5.apps.googleusercontent.com</string>
+	<key>REVERSED_GIDClientID</key>
+	<string>com.googleusercontent.apps.221523093975-jr6o0k2k9m0t0v05463i0u8umta22vp5</string>
 </dict>
 </plist>
