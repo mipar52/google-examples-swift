@@ -19,11 +19,26 @@ class DriveController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sheetService.apiKey = K.apiKey
-        sheetService.authorizer = GIDSignIn.sharedInstance.currentUser?.authentication.fetcherAuthorizer()
+        guard let currentUser = GIDSignIn.sharedInstance.currentUser else {
+            print("No current user")
+            return
+        }
         
-        driveService.apiKey = K.apiKey
-        driveService.authorizer = GIDSignIn.sharedInstance.currentUser?.authentication.fetcherAuthorizer()
+        currentUser.refreshTokensIfNeeded { user, error in
+            guard error == nil else { return }
+            guard let user = user else { return }
+            
+            // Get the access token to attach it to a REST or gRPC request.
+            let accessToken = user.accessToken.tokenString
+            self.sheetService.additionalHTTPHeaders = ["Authorization": "Bearer \(accessToken)"]
+            self.driveService.additionalHTTPHeaders = ["Authorization": "Bearer \(accessToken)"]
+            
+            // Or, get an object that conforms to GTMFetcherAuthorizationProtocol for
+            // use with GTMAppAuth and the Google APIs client library.
+            let authorizer = user.fetcherAuthorizer
+            self.sheetService.authorizer = authorizer
+            self.driveService.authorizer = authorizer
+        }
     }
     
     @IBAction func createNewSpreadPressed(_ sender: UIButton) {
